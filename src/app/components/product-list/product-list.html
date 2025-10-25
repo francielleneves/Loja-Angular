@@ -1,0 +1,9 @@
+<h2>Nossos Produtos</h2>
+  <div>
+    @for (product of products; track product.id) {
+    <button (click)="selectProduct(product)">{{ product.name }}</button>
+}
+  </div>
+  @if (selectedProduct) {
+    <app-product-detail [product]="selectedProduct"></app-product-detail> 
+  }
