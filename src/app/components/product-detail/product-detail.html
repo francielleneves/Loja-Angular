@@ -1,8 +1,13 @@
 <div>
-  <h3>{{ product.name }}</h3>
+  <h3>{{ product.name | uppercase}} <span style="color: red;">{{ product.onSale | onSale }}</span></h3>
   <p>{{ product.description}}</p>
-  <p>Preço: {{ product.price }} </p>
-  <p>Data de Lançamento: {{ product.launchDate }}</p>
-  <p>Status: {{ product.available }}</p>
+  @if (product.onSale) {
+    <strong style="text-decoration: line-through;">{{product.price | currency:'BRL'}}</strong>
+    <strong style="color: green; margin-left: 10px;">{{ discountedPrice | currency:'BRL'}}</strong>
+  } @else {
+      <p>Preço: {{ product.price | currency:'BRL'}}</p>
+  }
+  <p>Data de Lançamento: {{ product.launchDate | date: 'dd/MM/yyyy'}}</p>
+  <p>Status: {{ product.available | availability }}</p>
 </div>
 
