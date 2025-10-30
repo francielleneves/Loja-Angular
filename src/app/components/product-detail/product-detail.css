@@ -1,0 +1,36 @@
+.product-detail {
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+ .price-container {
+    display: flex;
+    align-items: center;
+ }
+  .original-price {
+    text-decoration: line-through;
+    color: #999999;
+    margin-right: 10px;
+  }
+
+  .discounted-price {
+    color:green;
+    font-weight: bold;
+  }
+@media (max-width: 768px) {
+    .product-detail {
+      margin-top:0;
+      border-top: none;
+      border-radius: 0;
+    }
+    .card-title {
+       flex-direction: column;
+        align-items: flex-start!important;
+    }
+
+    .badge {
+        margin-top: 10px;
+    }
+}
