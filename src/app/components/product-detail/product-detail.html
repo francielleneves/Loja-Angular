@@ -1,4 +1,18 @@
 <div class="card product-detail">
+  <div class="row g-0">
+    <div class="col-md-5">
+      <img
+      [src]="product.imgUrl"
+      class="img-fluid rounded-start"
+      [alt]="product.name"
+      [class.zoomed]="isZoomed"
+      (mouseenter)="isZoomed = true"
+      (mouseleave)="isZoomed = false"
+
+      />
+
+    </div>
+    <div class="col-md-7">
   <div class="card-body">
 
     <!-- Título do produto -->
@@ -8,7 +22,7 @@
     </h3>
 
     <!-- Descrição -->
-    <p>{{ product.description }}</p>
+    <p class="card-text">{{ product.description }}</p>
 
     <!-- Preço -->
     <!-- Se estiver em promoção, mostra preço original riscado e o desconto em verde -->
@@ -34,14 +48,14 @@
         Data de Lançamento: {{ product.launchDate | date:'dd/MM/yyyy' }}
       </small>
     </p>
-
     <!-- Status -->
     <p class="card-text">
       <small class="text-muted">
         Status: {{ product.available | availability }}
       </small>
     </p>
-
+  </div>
+    </div>
   </div>
 </div>
 
