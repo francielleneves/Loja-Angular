@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { Store } from '@ngrx/store';
+import * as CartActions from '../../store/cart.actions';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,13 +12,19 @@ import { ProductService } from '../../services/product.service';
   styleUrl: './product-detail.component.css'
 })
 export class ProductDetailComponent implements OnInit {
-  product: any;
+  product: any;  
   isZoomed: boolean = false;
 
   constructor (
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private store: Store
   ) {}
+
+  addToCart() {
+    this.store.dispatch(CartActions.addProductToCart({ product: this.product }));
+    console.log('Produto adicionado ao carrinho!');
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
