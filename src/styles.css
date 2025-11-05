@@ -1,5 +1,5 @@
 body {
-background-color: blueviolet !important;
+background-color: blueviolet;
 }
 @media (max-width: 768px) {
   body {
