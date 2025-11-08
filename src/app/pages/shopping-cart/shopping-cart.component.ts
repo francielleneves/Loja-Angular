@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import * as CartActions from '../../store/cart.actions';
+import { CartItem } from '../../types';
+import { CartState } from '../../store/cart.states';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,9 +13,9 @@ import * as CartActions from '../../store/cart.actions';
   styleUrl: './shopping-cart.component.css'
 })
 export class ShoppingCartComponent {
-  cartItems: Observable<any[]>;
+  cartItems: Observable<CartItem[]>;
 
-  constructor( private store: Store<{ cart: { items: any[] } }>) {
+  constructor( private store: Store<{ cart: CartState }>) {
     this.cartItems = this.store.select(state => state.cart.items);
   }
 

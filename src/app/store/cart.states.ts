@@ -1,5 +1,6 @@
+import { CartItem } from "../types";
 export interface CartState {
-    items: any[];
+    items: CartItem[];
     total: number;
 }
 

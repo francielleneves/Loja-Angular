@@ -3,6 +3,7 @@ import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from "@angular/router";
 import { CategoryListComponent } from '../../components/category-list/category-list.component';
+import { Product } from '../../types';
 
 @Component({
   selector: 'app-product-list',
@@ -29,6 +30,6 @@ export class ProductListComponent implements OnInit {
   onCategorySelected(category: string) {
     this.productService.getProductsByCategory(category).subscribe(data => {
       this.products = data;
-    }); 
+    });
   }
 }
