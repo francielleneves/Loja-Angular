@@ -1,29 +1,54 @@
-<h2>Carrinho de compras</h2>
+<div class="container my-5">
+  <h2 class="text-center fw-bold text-warning mb-4">🛒 Carrinho de Compras</h2>
 
-@if (cartItems | async; as items) {
-    @if (items.length > 0) {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Preço</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (item of items; track item.index) {
-                    <tr>
-                        <td>{{ item.title }}</td>
-                        <td>{{ item.price | currency:'BRL' }}</td>
-                        <td>
-                            <button (click)="removeItem(item.id)" class="btn btn-sm btn-danger">Remover</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <button (click)="clearCart()" class="btn btn-warning mt-4">Limpar carrinho</button>
-    } @else {
-        <p>O seu carrinho está vazio!</p>
-    }
-}
+  <!-- Carrinho vazio -->
+  <ng-container *ngIf="(cartItems$ | async)?.length === 0; else filledCart">
+    <div class="alert alert-secondary text-center shadow-sm">
+      Seu carrinho está vazio 😕
+      <a routerLink="/" class="btn btn-outline-warning btn-sm ms-2">Voltar às compras</a>
+    </div>
+  </ng-container>
+
+  <!-- Carrinho cheio -->
+  <ng-template #filledCart>
+    <div class="table-responsive shadow-sm rounded">
+      <table class="table align-middle">
+        <thead class="table-dark text-center">
+          <tr>
+            <th>Imagem</th>
+            <th>Produto</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Subtotal</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems$ | async; trackBy: trackByProduct" class="text-center">
+            <td><img [src]="item.product.image" [alt]="item.product.title" width="70" class="img-thumbnail" /></td>
+            <td class="text-start">{{ item.product.title }}</td>
+            <td>{{ item.product.price | currency:'BRL' }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.product.price * item.quantity | currency:'BRL' }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger" (click)="removeItem(item.product.id)">Remover</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Total e ações -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 gap-3">
+      <h4 class="fw-bold">
+        Total:
+        <span class="text-success">{{ total$ | async | currency:'BRL' }}</span>
+      </h4>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-danger" (click)="clearCart()">🗑️ Limpar Carrinho</button>
+        <a routerLink="/checkout" class="btn btn-success">💳 Finalizar Compra</a>
+      </div>
+    </div>
+  </ng-template>
+</div>

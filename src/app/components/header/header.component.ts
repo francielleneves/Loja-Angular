@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { CartStatusComponent } from '../cart-status/cart-status.component';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, CartStatusComponent],
+  standalone: true,
+  imports: [CommonModule, RouterModule, CartStatusComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
-
-}
+export class HeaderComponent {}

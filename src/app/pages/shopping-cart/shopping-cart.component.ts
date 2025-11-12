@@ -5,25 +5,33 @@ import { CommonModule } from '@angular/common';
 import * as CartActions from '../../store/cart.actions';
 import { CartItem } from '../../types';
 import { CartState } from '../../store/cart.states';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './shopping-cart.component.html',
-  styleUrl: './shopping-cart.component.css'
+  styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent {
-  cartItems: Observable<CartItem[]>;
+  cartItems$: Observable<CartItem[]>;
+  total$: Observable<number>;
 
-  constructor( private store: Store<{ cart: CartState }>) {
-    this.cartItems = this.store.select(state => state.cart.items);
+  constructor(private store: Store<{ cart: CartState }>) {
+    this.cartItems$ = this.store.select((state) => state.cart.items);
+    this.total$ = this.store.select((state) => state.cart.total);
   }
 
-  removeItem(productId: number) {
+  removeItem(productId: number): void {
     this.store.dispatch(CartActions.removeProductFromCart({ productId }));
   }
 
-  clearCart() {
+  clearCart(): void {
     this.store.dispatch(CartActions.clearCart());
+  }
+
+  trackByProduct(index: number, item: CartItem): number {
+    return item.product.id;
   }
 }

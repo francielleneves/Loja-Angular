@@ -10,9 +10,12 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-     provideRouter(routes),
-     provideHttpClient(),
+    provideRouter(routes),
+    provideHttpClient(),
     provideStore({ cart: cartReducer }),
-    provideStoreDevtools({maxAge: 25, logOnly: !isDevMode() })
-  ]
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(), // ✅ mantém DevTools só no modo dev
+    }),
+  ],
 };

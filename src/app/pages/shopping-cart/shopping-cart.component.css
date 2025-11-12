@@ -1,0 +1,35 @@
+table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+td img {
+  border-radius: 0.3rem;
+  transition: transform 0.3s ease;
+}
+
+td img:hover {
+  transform: scale(1.1);
+}
+
+.alert {
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 1px solid #ffc107;
+}
+
+.btn-outline-warning:hover {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+@media (max-width: 768px) {
+  table th,
+  table td {
+    font-size: 0.9rem;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+  }
+}

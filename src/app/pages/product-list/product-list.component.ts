@@ -1,35 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from "@angular/router";
-import { CategoryListComponent } from '../../components/category-list/category-list.component';
+import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { Product } from '../../types';
+
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, CategoryListComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
+  loading = true;
 
-  constructor(private productService: ProductService) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.loadProducts();
-  }
-
-
-    loadProducts() {
-    this.productService.getProducts().subscribe(data => {
-      this.products = data;
-    });
-  }
-  onCategorySelected(category: string) {
-    this.productService.getProductsByCategory(category).subscribe(data => {
-      this.products = data;
+    this.http.get<Product[]>('https://fakestoreapi.com/products').subscribe({
+      next: (res) => {
+        this.products = res;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar produtos:', err);
+        this.loading = false;
+      },
     });
   }
 }

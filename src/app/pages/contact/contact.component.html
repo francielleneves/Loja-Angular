@@ -1,0 +1,44 @@
+<div class="container my-5">
+  <h2 class="mb-4">📞 Entre em Contato</h2>
+
+  <form [formGroup]="contactForm" (ngSubmit)="submit()" novalidate class="card p-4 shadow-sm">
+    <div class="mb-3">
+      <label class="form-label">Nome completo</label>
+      <input formControlName="name" type="text" class="form-control" placeholder="Seu nome completo" />
+      <div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.invalid" class="text-danger small mt-1">
+        <div *ngIf="contactForm.get('name')?.errors?.['required']">O nome é obrigatório.</div>
+        <div *ngIf="contactForm.get('name')?.errors?.['minlength']">Mínimo de 3 caracteres.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">E-mail</label>
+      <input formControlName="email" type="email" class="form-control" placeholder="exemplo@dominio.com" />
+      <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid" class="text-danger small mt-1">
+        <div *ngIf="contactForm.get('email')?.errors?.['required']">O e-mail é obrigatório.</div>
+        <div *ngIf="contactForm.get('email')?.errors?.['email']">Formato de e-mail inválido.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Telefone</label>
+      <input formControlName="phone" type="tel" class="form-control" placeholder="(11) 99999-9999" />
+      <div *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.invalid" class="text-danger small mt-1">
+        <div *ngIf="contactForm.get('phone')?.errors?.['required']">O telefone é obrigatório.</div>
+        <div *ngIf="contactForm.get('phone')?.errors?.['invalidPhone']">Formato inválido. Ex: (11)99999-9999</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Mensagem</label>
+      <textarea formControlName="message" class="form-control" rows="4" placeholder="Digite sua mensagem"></textarea>
+      <div *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.invalid" class="text-danger small mt-1">
+        <div *ngIf="contactForm.get('message')?.errors?.['required']">A mensagem é obrigatória.</div>
+        <div *ngIf="contactForm.get('message')?.errors?.['maxlength']">Máximo de 500 caracteres.</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3 w-100">Enviar Mensagem</button>
+  </form>
+</div>
+

@@ -1,5 +1,20 @@
-.card-img-top {
-    height: 200px;
-    object-fit: contain;
-    padding: 10px;
+.card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-outline-warning:hover {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 180px !important;
+  }
 }

@@ -1,0 +1,68 @@
+<div class="container my-5">
+  <h2 class="mb-4">💳 Finalizar Compra</h2>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="submit()" class="card p-4 shadow-sm">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Nome completo</label>
+        <input type="text" formControlName="fullName" class="form-control" />
+        <div *ngIf="checkoutForm.get('fullName')?.touched && checkoutForm.get('fullName')?.invalid" class="text-danger small">
+          <div *ngIf="checkoutForm.get('fullName')?.errors?.['required']">Campo obrigatório.</div>
+          <div *ngIf="checkoutForm.get('fullName')?.errors?.['minlength']">Mínimo de 3 caracteres.</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">E-mail</label>
+        <input type="email" formControlName="email" class="form-control" />
+        <div *ngIf="checkoutForm.get('email')?.touched && checkoutForm.get('email')?.invalid" class="text-danger small">
+          <div *ngIf="checkoutForm.get('email')?.errors?.['required']">Campo obrigatório.</div>
+          <div *ngIf="checkoutForm.get('email')?.errors?.['email']">Formato inválido.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Endereço</label>
+      <input type="text" formControlName="address" class="form-control" />
+      <div *ngIf="checkoutForm.get('address')?.touched && checkoutForm.get('address')?.invalid" class="text-danger small">
+        <div *ngIf="checkoutForm.get('address')?.errors?.['required']">Campo obrigatório.</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Telefone</label>
+        <input type="tel" formControlName="phone" class="form-control" placeholder="(11) 99999-9999" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Número do Cartão</label>
+        <input type="text" formControlName="cardNumber" class="form-control" placeholder="0000 0000 0000 0000" />
+        <div *ngIf="checkoutForm.get('cardNumber')?.touched && checkoutForm.get('cardNumber')?.invalid" class="text-danger small">
+          <div *ngIf="checkoutForm.get('cardNumber')?.errors?.['required']">Campo obrigatório.</div>
+          <div *ngIf="checkoutForm.get('cardNumber')?.errors?.['invalidCard']">Número de cartão inválido.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Validade</label>
+        <input type="month" formControlName="expiry" class="form-control" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">CVV</label>
+        <input type="text" formControlName="cvv" maxlength="4" class="form-control" placeholder="123" />
+        <div *ngIf="checkoutForm.get('cvv')?.touched && checkoutForm.get('cvv')?.invalid" class="text-danger small">
+          <div *ngIf="checkoutForm.get('cvv')?.errors?.['required']">Campo obrigatório.</div>
+          <div *ngIf="checkoutForm.get('cvv')?.errors?.['minlength']">CVV inválido.</div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3 w-100">Finalizar Compra</button>
+  </form>
+</div>
+
